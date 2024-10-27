@@ -115,7 +115,7 @@ const Wheel: React.FC = () => {
 
   return (
     <>
-      <div className="w-full max-w-md bg-slate-800 backdrop-blur-sm shadow-xl rounded-2xl p-6">
+      <div className="select-none w-full max-w-md bg-slate-800 backdrop-blur-sm shadow-xl rounded-2xl p-6">
         <div className="relative w-full pb-[100%] mb-8">
           <div className="absolute inset-0">
             <div
