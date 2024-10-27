@@ -137,21 +137,25 @@ const Wheel: React.FC = () => {
             ></div>
           </div>
         </div>
-        <button
-          onClick={spinWheel}
-          disabled={spinning}
-          className="w-full text-lg p-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-600 disabled:bg-gray-400 flex justify-center items-center"
-          aria-label={spinning ? "Wheel is spinning" : "Spin the wheel"}
-        >
-          {spinning ? (
-            <>
-              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-              Spinning...
-            </>
-          ) : (
-            "Spin the Wheel!"
-          )}
-        </button>
+
+        {!result && (
+          <button
+            onClick={spinWheel}
+            disabled={spinning}
+            className="w-full text-lg p-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-600 disabled:bg-gray-400 flex justify-center items-center"
+            aria-label={spinning ? "Wheel is spinning" : "Spin the wheel"}
+          >
+            {spinning ? (
+              <>
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                Spinning...
+              </>
+            ) : (
+              "Spin the Wheel!"
+            )}
+          </button>
+        )}
+
         {result && (
           <div className="mt-4 text-center">
             <p className="text-2xl font-bold text-white">
