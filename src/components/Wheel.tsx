@@ -3,21 +3,44 @@ import confetti from "canvas-confetti";
 import { Loader2 } from "lucide-react";
 
 const sectors = [
-  { color: "#FF6B6B", label: "10% OFF" },
-  { color: "#FFD93D", label: "15% OFF" },
-  { color: "#6A0572", label: "20% OFF" },
-  { color: "#007965", label: "25% OFF" },
-  { color: "#3ABEFF", label: "30% OFF" },
-  { color: "#F2545B", label: "FREE ITEM" },
-  { color: "#56E39F", label: "5% OFF" },
-  { color: "#A29BFE", label: "TRY AGAIN" },
+  { color: "#FF6B6B", label: "10% OFF", probability: 0.4 },
+  { color: "#6A0572", label: "15% OFF", probability: 0.15 },
+  { color: "#FFD93D", label: "40% OFF", probability: 0.1 },
+  { color: "#007965", label: "60% OFF", probability: 0.04 },
+  { color: "#3ABEFF", label: "80% OFF", probability: 0.01 },
+  { color: "#F2545B", label: "90% OFF", probability: 0 },
+  { color: "#56E39F", label: "MYSTERY BOX", probability: 0.3 },
 ];
 
 // Simulate getting the winning segment from the backend
-const getSegmentFromBackend = async () => {
-  const responseIndex = Math.floor(Math.random() * sectors.length);
-  return responseIndex;
-};
+// const getSegmentFromBackend = async () => {
+//   const responseIndex = Math.floor(Math.random() * sectors.length);
+//   return responseIndex;
+// };
+
+interface Sector {
+  color: string;
+  label: string;
+  probability: number;
+}
+
+function getWeightedRandom(segments: Sector[]): number {
+  const totalWeight = segments.reduce(
+    (acc, segment) => acc + segment.probability,
+    0
+  );
+
+  const random = Math.random() * totalWeight;
+  let cumulativeProbability = 0;
+
+  for (const [index, segment] of segments.entries()) {
+    cumulativeProbability += segment.probability;
+    if (random <= cumulativeProbability) {
+      return index; // Return the index of the selected segment
+    }
+  }
+  return segments.length - 1; // Return the last index if not found
+}
 
 const Wheel: React.FC = () => {
   const [spinning, setSpinning] = useState(false);
@@ -35,7 +58,7 @@ const Wheel: React.FC = () => {
     setRemaining(10); // Reset the countdown
 
     // Get winning segment from backend
-    const selectedIndex = await getSegmentFromBackend();
+    const selectedIndex = await getWeightedRandom(sectors);
 
     // Calculate target angle for the selected segment (base rotation + target offset)
     const targetAngle =
