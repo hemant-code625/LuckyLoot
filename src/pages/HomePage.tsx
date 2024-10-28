@@ -11,8 +11,8 @@ import {
   ArrowRight,
   CheckCircle,
   DollarSign,
-  Moon,
-  Sun,
+  // Moon,
+  // Sun,
   Zap,
 } from "lucide-react";
 
