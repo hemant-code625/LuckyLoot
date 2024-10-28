@@ -1,12 +1,8 @@
 import React from "react";
-import Wheel from "../components/Wheel";
+import HomePage from "../pages/HomePage";
 
 const Home: React.FC = () => {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 transition-colors duration-500">
-      <Wheel />
-    </div>
-  );
+  return <HomePage />;
 };
 
 export default Home;
