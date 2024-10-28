@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import confetti from "canvas-confetti";
-import { Loader2, Plus, Trash } from "lucide-react";
+import { Loader2, Plus, Trash, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -94,6 +94,13 @@ const CustomizableWheel: React.FC = () => {
 
     return () => clearInterval(countdownTimer);
   }, [remaining, spinning]);
+
+  const handleFeedback = () => {
+    const message = encodeURIComponent(
+      "Hi! I just tried your Spin the Wheel product and I'd like to share my feedback:"
+    );
+    window.open(`https://wa.me/7559228490?text=${message}`, "_blank");
+  };
 
   const handleReset = () => {
     if (!spinning && wheelRef.current) {
@@ -210,6 +217,16 @@ const CustomizableWheel: React.FC = () => {
               </button>
             </div>
           )}
+        </div>
+        <div className="flex items-center justify-center w-fit mt-10">
+          <button
+            onClick={handleFeedback}
+            className="flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg shadow-lg transition duration-300"
+            aria-label="Give feedback on WhatsApp"
+          >
+            <MessageCircle className="mr-2 h-5 w-5" />
+            We value your feedback!
+          </button>
         </div>
       </div>
 
