@@ -4,6 +4,8 @@ import { Loader2, Plus, Trash, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import popperSound from "../assets/popper.mp3";
+import WheelSound from "../assets/spin-wheel-sound-effect.mp3";
 
 interface Sector {
   color: string;
@@ -49,7 +51,7 @@ const CustomizableWheel: React.FC = () => {
 
   const spinWheel = async () => {
     if (spinning) return;
-
+    new Audio(WheelSound).play();
     setSpinning(true);
     setResult("");
     setRemaining(10);
@@ -68,10 +70,16 @@ const CustomizableWheel: React.FC = () => {
       setSpinning(false);
       setResult(sectors[selectedIndex].label);
       if (sectors[selectedIndex].label !== "TRY AGAIN") {
+        new Audio(popperSound).play();
         confetti({
           particleCount: 100,
           spread: 160,
-          origin: { x: 0.5, y: 0.6 },
+          origin: { x: 0.2, y: 0.6 },
+        });
+        confetti({
+          particleCount: 100,
+          spread: 160,
+          origin: { x: 0.8, y: 0.6 },
         });
       }
     }, 5000);
