@@ -51,7 +51,7 @@ const CustomizableWheel: React.FC = () => {
 
   const spinWheel = async () => {
     if (spinning) return;
-    new Audio(WheelSound).play();
+    // new Audio(WheelSound).play();
     setSpinning(true);
     setResult("");
     setRemaining(10);
@@ -70,7 +70,7 @@ const CustomizableWheel: React.FC = () => {
       setSpinning(false);
       setResult(sectors[selectedIndex].label);
       if (sectors[selectedIndex].label !== "TRY AGAIN") {
-        new Audio(popperSound).play();
+        // new Audio(popperSound).play();
         confetti({
           particleCount: 100,
           spread: 160,
